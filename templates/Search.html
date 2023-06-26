@@ -1,0 +1,30 @@
+{% extends "Base.html" %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>ADRESSEID</th>
+    <th>fylke</th>
+    <th>kommune</th>
+    <th>BYGNINGSTYPE</th>
+    <th>Lat</th>
+    <th>Lon</th>
+  </tr>
+  {%for i in ListData%}
+    <tr>
+    <td>{{i[0]}}</td>
+    <td>{{i[1]}}</td>
+    <td>{{i[2]}}</td>
+    <td>{{i[3]}}</td>
+    <td>{{i[4]}}</td>
+    <td>{{i[5]}}</td>
+    </tr>
+  {%endfor%}
+</table>
+{% endblock %}
