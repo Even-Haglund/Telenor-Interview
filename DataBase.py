@@ -6,7 +6,6 @@ con = sqlite3.connect("database.db", check_same_thread=False, timeout=200)
 cur = con.cursor()
 
 
-#get the count of tables with the name "Ansatte"
 cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Telenor' ''')
 #if the count is 1, then table exists, if not create it
 if cur.fetchone()[0]!=1 :{
@@ -20,9 +19,24 @@ if cur.fetchone()[0]!=1 :{
             PRIMARY KEY (ADRESSEID))""")
 }
     
+
+cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='UserDB' ''')
+#if the count is 1, then table exists, if not create it
+if cur.fetchone()[0]!=1 :{
+    cur.execute("""CREATE Table UserDB (
+            user_id NUMBER not null,
+            email text not null,
+            password text not null,
+            clerance BIT,
+            PRIMARY KEY (user_id))""")
+}
+cur.execute("INSERT INTO UserDB VALUES (?, ?, ?, ?)", ['1', 'evenhaglund@live.no', 'Password', 0])
+cur.execute("INSERT INTO UserDB VALUES (?, ?, ?, ?)", ['2', 'evenhaglund@gmail.com', 'Password', 1])
+con.commit()   
+
+    
 FileToGoThrough = open("AdresserUtsira.csv", "r")
 for lines in FileToGoThrough:
-    print(lines)
     try: 
         Info = lines.split(";")
         cur.execute("INSERT INTO Telenor VALUES (?, ?, ?, ?, ?, ?)", Info)
