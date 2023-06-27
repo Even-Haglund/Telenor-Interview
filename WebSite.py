@@ -19,3 +19,8 @@ def Table():
     for lines in dataSelect:
         listData.append(lines)
     return render_template("Search.html", ListData=listData)
+
+
+if __name__ == "__main__":
+    app.secret_key = '9597975'
+    app.run(debug=False)
